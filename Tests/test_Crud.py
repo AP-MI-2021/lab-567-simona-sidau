@@ -48,4 +48,12 @@ def test_modifica_vanzare():
     assert get_reducere(vanzare_neupdatata) == "silver"
 
 
+def test_get_by_id():
+    lista = []
+    lista = adaugare_vanzare("1", "Plumb", "Poezii", 17, "none", lista)
+    lista = adaugare_vanzare("2", "You", "Dezvoltare Personala", 58, "silver", lista)
 
+    assert get_by_id("1", lista) is not None
+    assert get_by_id("5", lista) is None
+    assert get_by_id("2", lista) == lista[1]
+    assert get_by_id("1", lista) == lista[0]
