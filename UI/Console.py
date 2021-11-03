@@ -88,10 +88,31 @@ def print_console_menu():
 
 
 def print_comand_line_console_menu():
-    print("1. Adaugare vanzare")
-    print("2. Sterge vanzare")
-    print("3. Show all")
+    print("add. Adaugare vanzare (id, titlu, gen, pret, tip reducere)")
+    print("delete. Sterge vanzare")
+    print("show all. Show all")
     print("x. Exit")
+
+
+def ui_add(lista, option):
+    try:
+        id = option[1]
+        titlu = option[2]
+        gen = option[3]
+        pret = int(option[4])
+        reducere = option[5]
+        if get_by_id(id, lista) is not None:
+            raise ValueError("Id-ul exista deja!")
+        return adaugare_vanzare(id, titlu, gen, pret, reducere, lista)
+    except ValueError as ve:
+        print("Eroare {}".format(ve))
+        return lista
+
+
+def ui_delete(lista, option):
+    id = option[1]
+    print(id)
+    return sterge_vanzare(id, lista)
 
 
 def run_menu(lista):
@@ -129,23 +150,26 @@ def run_menu(lista):
             should_run = True
             while should_run:
                 print_comand_line_console_menu()
-                linie_optiune = input("Introduceti comenzile separete prin virgula: ")
-                ajutor_optiune = linie_optiune.split(",")
-                for optiune in ajutor_optiune:
-                    if optiune == "1":
-                        lista = ui_adaugare_vanzare(lista)
-                        print("Optiunea 1 realizata!")
-                    elif optiune == "2":
-                        lista = ui_sterge_vanzare(lista)
-                        print("Optiunea 2 realizata!")
-                    elif optiune == "3":
+                command_line = input("Introduceti comenzile separete prin punct si virgula,"
+                                     " iar specificatiile prin virgula: ")
+                option_line = command_line.split(";")
+                for ajutor in option_line:
+                    option = ajutor.split(",")
+                    if option[0] == "add":
+                        lista = ui_add(lista, option)
+                        print("Optiunea add realizata!")
+                    elif option[0] == "show all":
                         afisare(lista)
-                        print("Optiunea 3 realizata!")
-                    elif optiune == "x":
+                        print("Optiunea show all realizata")
+                    elif option[0] == "delete":
+                        lista = ui_delete(lista, option)
+                        print("Optiunea delete realizata")
+                    elif option[0] == "x":
                         should_run = False
                         break
                     else:
-                        print("Optiunea {} este inexistenta! Reincercati!".format(optiune))
+                        print("Optiunea {} nu exista. Reincercati".format(option[0]))
+
         elif optiune == "x":
             break
         else:
