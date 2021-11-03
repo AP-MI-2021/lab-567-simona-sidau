@@ -145,7 +145,7 @@ def run_menu(lista):
                         should_run = False
                         break
                     else:
-                        print("Optiunea {} este inexistenta! Reincercati".format(optiune))
+                        print("Optiunea {} este inexistenta! Reincercati!".format(optiune))
         elif optiune == "x":
             break
         else:
