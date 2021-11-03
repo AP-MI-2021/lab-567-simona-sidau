@@ -134,13 +134,13 @@ def run_menu(lista):
                 for optiune in ajutor_optiune:
                     if optiune == "1":
                         lista = ui_adaugare_vanzare(lista)
-                        print("Optiunea 1 realizata cu succes!")
+                        print("Optiunea 1 realizata!")
                     elif optiune == "2":
                         lista = ui_sterge_vanzare(lista)
-                        print("Optiunea 2 realizata cu succes!")
+                        print("Optiunea 2 realizata!")
                     elif optiune == "3":
                         afisare(lista)
-                        print("Optiunea 3 realizata cu succes!")
+                        print("Optiunea 3 realizata!")
                     elif optiune == "x":
                         should_run = False
                         break
